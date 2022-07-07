@@ -10,3 +10,32 @@ insert into animals ( id, name, date_of_birth, escape_attempts, neutered, weight
 insert into animals ( id, name, date_of_birth, escape_attempts, neutered, weight_kg) values ( 9, 'Boarmon', '2005-06-07', 7, true, 20.4);
 insert into animals ( id, name, date_of_birth, escape_attempts, neutered, weight_kg) values ( 10, 'Blossom', '1998-10-13', 3, true, 17);
 insert into animals ( id, name, date_of_birth, escape_attempts, neutered, weight_kg) values ( 11, 'Ditto', '2022-05-14', 4, true, 22);
+
+
+begin;
+update animals set species = 'unspecified';
+select * from animals;
+rollback;
+
+begin;
+update animals set species = 'digimon' where name like '%mon';
+
+update animals set species = 'pokemon' where species is null;
+select * from animals;
+commit;
+
+begin;
+delete from animals;
+select * from animals;
+rollback;
+select * from animals;
+
+
+begin;
+delete from animals where date_of_birth > '2022-01-01';
+savepoint save_point1;
+update animals set weight_kg = weight_kg * (-1);
+rollback to save_point1;
+update animals set weight_kg = weight_kg * (-1) where weight_kg < 0;
+commit;
+select * from animals;
