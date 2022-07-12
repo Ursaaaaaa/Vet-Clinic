@@ -51,3 +51,8 @@ SELECT visits.date_of_visit, animals.name AS ANIMALS_NAME, animals.date_of_birth
 SELECT COUNT(visits.animals_id) FROM visits JOIN vets ON vets.id = visits.vets_id JOIN animals ON animals.id = visits.animals_id JOIN specializations ON specializations.vets_id = vets.id WHERE specializations.species_id != animals.species_id;
 -- what specialty should Maisy Smith consider getting? Look for the species she gets the most.
 SELECT COUNT(animals.species_id) as count_visit, species.name FROM animals JOIN visits ON animals.id = visits.animals_id JOIN vets ON vets.id = visits.vets_id JOIN species ON animals.species_id = species.id WHERE vets.name = 'Maisy Smith' GROUP BY species.name ORDER BY count_visit DESC LIMIT 1;
+
+--performance-audit
+CREATE INDEX idx_animal_id ON visits(animals_id, asc);
+CREATE INDEX idx_vet_id ON visits(vets_id, asc);
+CREATE INDEX idx_email ON owners(email, asc);
