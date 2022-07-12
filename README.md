@@ -2,7 +2,7 @@
 
 > A relational database to create the data structure for a vet clinic.
 
-[Diagram](./screenshots/draw.png)
+![Diagram](./screenshots/draw.png)
 
 ## Getting Started
 
